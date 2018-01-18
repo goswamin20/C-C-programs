@@ -1,0 +1,79 @@
+#include <stdio.h>
+void Merge (int array[], int begin, int mid, int end)
+            {
+            int begin1 = begin;
+            int end1   = mid;
+            int begin2 = mid +1;
+            int end2   = end;
+            int p=begin1;
+            int q=begin2;
+            int temp[end];
+            int k=begin;
+            while(p<end1 && q<end2){
+                if (array[p] < array[q]){
+                 temp[k]=array[p];
+                 p++;
+                }
+                else{
+                    temp[k]=array[q];
+                    q++;
+                }
+                k++;
+            }
+                    
+            while (p < end1)
+            {
+                temp[k] = array[p];
+                p++;
+                k++;
+            }
+            
+            while (q < end2)
+            {
+                temp[k] = array[q];
+                q++;
+                k++;
+            }
+            
+            for(k=begin;k<end;k++){
+                array[k]=temp[k];
+            }    
+                            
+            }
+
+void MergeSort( int array[], int begin, int end)
+            {
+                int mid = 0;
+                if (begin < end)
+                {
+                    mid = (begin+end)/2;
+                    MergeSort(array,begin,mid);
+                    MergeSort(array,mid+1,end);
+                    Merge(array,begin,mid,end);
+                }
+            }
+            
+            
+int main()
+{
+    int n=10;
+    int array[10];
+    int i;
+    int hold;
+    int j;
+    
+    printf("\nEnter the numbers:\n",n);
+    for(i = 0; i < n; i ++)
+    {
+        printf("%2d> ",i+1);
+        scanf("%d", &array[i]);
+    }
+    
+    MergeSort(array,0,n);
+        
+    for(i = 0; i < n; i ++)
+    {
+        printf("%d \n", array[i]);
+    }
+    return 0;
+}
